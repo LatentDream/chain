@@ -1,11 +1,10 @@
-use uuid::Uuid;
 use std::fmt;
 
 #[derive(Debug, Clone)]
 pub struct Transaction { 
-    sender: Uuid,
-    receiver: Uuid,
-    amount: u32
+    sender: String,
+    receiver: String,
+    amount: u128
 }
 
 #[derive(Debug, Clone)]
@@ -15,7 +14,7 @@ pub struct Block {
 
 
 impl Transaction {
-    pub fn new(sender: Uuid, receiver: Uuid, amount: u32) -> Transaction {
+    pub fn new(sender: String, receiver: String, amount: u128) -> Transaction {
         Transaction {
             sender,
             receiver,
@@ -23,15 +22,15 @@ impl Transaction {
         }
     }
 
-    pub fn get_sender(&self) -> &Uuid {
+    pub fn get_sender_id(&self) -> &String {
         &self.sender
     }
 
-    pub fn get_receiver(&self) -> &Uuid {
+    pub fn get_receiver_id(&self) -> &String {
         &self.receiver
     }
 
-    pub fn get_amount(&self) -> &u32 {
+    pub fn get_amount(&self) -> &u128 {
         &self.amount
     }
 }

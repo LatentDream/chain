@@ -1,4 +1,3 @@
-	
 # Blockchain Simulation in Rust
 
 Toy blockchain called ‘B’.
