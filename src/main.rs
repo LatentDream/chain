@@ -1,6 +1,4 @@
-use std::process;
 use clap::{App, Arg};
-use reqwest;
 
 mod server;
 mod model;

@@ -1,7 +1,7 @@
 use std::fmt;
 
 #[derive(Debug, Clone)]
-pub struct Transaction { 
+pub struct Transfer { 
     sender: String,
     receiver: String,
     amount: u128
@@ -9,13 +9,13 @@ pub struct Transaction {
 
 #[derive(Debug, Clone)]
 pub struct Block {
-    transactions: Vec<Transaction>
+    transfers: Vec<Transfer>
 }
 
 
-impl Transaction {
-    pub fn new(sender: String, receiver: String, amount: u128) -> Transaction {
-        Transaction {
+impl Transfer {
+    pub fn new(sender: String, receiver: String, amount: u128) -> Transfer {
+        Transfer {
             sender,
             receiver,
             amount
@@ -35,7 +35,7 @@ impl Transaction {
     }
 }
 
-impl fmt::Display for Transaction {
+impl fmt::Display for Transfer {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
         write!(f, "Transaction: {} -> {} : {}b", self.sender, self.receiver, self.amount)
     }
@@ -44,15 +44,19 @@ impl fmt::Display for Transaction {
 impl Block {
     pub fn new() -> Block {
         Block {
-            transactions: Vec::new()
+            transfers: Vec::new()
         }
     }
 
-    pub fn add_transaction(&mut self, transaction: Transaction) {
-        self.transactions.push(transaction);
+    pub fn add_transfer(&mut self, transaction: Transfer) {
+        self.transfers.push(transaction);
     }
 
-    pub fn get_transactions(&self) -> &Vec<Transaction> {
-        &self.transactions
+    pub fn get_transfers(&self) -> &Vec<Transfer> {
+        &self.transfers
+    }
+
+    pub fn clear(&mut self) {
+        self.transfers.clear();
     }
 }
