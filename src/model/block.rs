@@ -52,10 +52,6 @@ impl Block {
         self.transfers.push(transaction);
     }
 
-    pub fn get_transfers(&self) -> &Vec<Transfer> {
-        &self.transfers
-    }
-
     pub fn clear(&mut self) {
         self.transfers.clear();
     }

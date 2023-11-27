@@ -3,8 +3,7 @@ use clap::{App, Arg};
 mod server;
 mod model;
 
-#[tokio::main]
-async fn main() {
+fn main() {
     let matches = App::new("b")
         .version("1.0")
         .author("Guillaume Thibault")
@@ -65,24 +64,24 @@ async fn main() {
 
         match matches.subcommand() {
             ("serve", _) => {
-                    server::launch_blockchain().await;
+                    server::server_single_thread();
                 }
             ("balance", Some(sub_matches)) => {
                     let id_of_account = sub_matches.value_of("account").expect("Please provide an account id").to_string();
-                    server::balance(id_of_account).await;
+                    server::balance(id_of_account);
                 }
             ("create-account", Some(sub_matches)) => {
                 let id_of_account = sub_matches.value_of("id-of-account").expect("Please provide an account id").to_string();
                 let starting_balance = sub_matches.value_of("starting-balance").expect("Please provide an initial balance").parse::<u128>().expect("Invalid starting balance");
                 println!("Creating account with id {} and starting balance {}", id_of_account, starting_balance);
-                server::create_account(id_of_account, starting_balance).await;
+                server::create_account(id_of_account, starting_balance);
             }
             ("transfer", Some(sub_matches)) => {
                 let from_account = sub_matches.value_of("from-account").expect("Please provide an account id").to_string();
                 let to_account = sub_matches.value_of("to-account").expect("Please provide an account id").to_string();
                 let amount = sub_matches.value_of("amount").expect("Please provide an amount").parse::<u128>().expect("Invalid amount");
                 println!("Transferring {} from {} to {}", amount, from_account, to_account);
-                server::transfer(from_account, to_account, amount).await;
+                server::transfer(from_account, to_account, amount);
             }
             _ => {
                 println!("{}", matches.usage());
