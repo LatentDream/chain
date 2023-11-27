@@ -9,7 +9,7 @@ fn main() {
         .author("Guillaume Thibault")
         .about("The B blockchain")
         .subcommand(
-            App::new("serve")
+            App::new("start-node")
                 .about("Launch the server")
         )
         .subcommand(
@@ -63,7 +63,7 @@ fn main() {
         .get_matches();
 
         match matches.subcommand() {
-            ("serve", _) => {
+            ("start-node", _) => {
                     server::server_single_thread();
                 }
             ("balance", Some(sub_matches)) => {
